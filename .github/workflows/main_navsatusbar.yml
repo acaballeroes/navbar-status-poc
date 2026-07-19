@@ -18,10 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # CAMBIO AQUÍ: Actualizado a v4 y fijado en Node 22 (LTS) para máxima estabilidad
       - name: Set up Node.js version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '24.x'
+          node-version: '22'
+          cache: 'npm' # Opcional: acelera tus deploys cacheando las dependencias
 
       - name: npm install, build, and test
         run: |
@@ -62,4 +64,3 @@ jobs:
           app-name: 'navsatusbar'
           slot-name: 'Production'
           package: .
-          
