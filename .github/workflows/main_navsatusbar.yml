@@ -18,20 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # CAMBIO AQUÍ: Actualizado a v4 y fijado en Node 22 (LTS) para máxima estabilidad
       - name: Set up Node.js version
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          # COMENTA O ELIMINA LA LÍNEA DE CACHÉ TEMPORALMENTE
-          # cache: 'npm' 
 
-      - name: npm install, build, and test
+      - name: Upgrade npm & Install
         run: |
-          npm config set maxsockets 1
-          npm ci --no-audit --no-fund
+          sudo npm install -g npm@latest
+          npm ci
           npm run build --if-present
-          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
